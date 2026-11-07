@@ -80,7 +80,13 @@ jd-lens/
 - **边界**：主动说清楚"不懂语义""判断不了要求高低"，比硬吹"AI 智能分析"更经得起追问。
 ---
 
+---
+
 ## 相关项目
+
+同一个人的另外两个项目，分别对应数据与后端：
 
 - **Retail Insight**（数据侧）→ [nanyang182/retail-insight](https://github.com/nanyang182/retail-insight)
   54 万条真实交易数据的分析看板：收入结构、客户分层、商品效率。
+- **SplitLink**（后端）→ [nanyang182/splitlink](https://github.com/nanyang182/splitlink)
+  带 A/B 分流的短链服务，纯 Python 标准库 + SQLite，零第三方依赖。
