@@ -1,5 +1,7 @@
 # JD Lens · 招聘要求分析器
 
+**中文** ｜ [English](README.en.md)
+
 > 粘一段招聘 JD，十秒看清：它在要什么、你还缺什么、先补哪个。
 
 ![界面](shots/03-demo.png)
