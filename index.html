@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JD Lens · 招聘要求分析器</title>
+<meta name="description" content="粘贴一段招聘 JD，看清它真正在要什么、你还缺什么。纯前端、离线可用。" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="appbar">
+  <div class="appbar-in">
+    <div class="brand">
+      <span class="mark"></span>
+      <span class="name">JD<b>LENS</b></span>
+      <span class="tagline">招聘要求分析器</span>
+    </div>
+    <div class="appbar-meta">
+      <span id="meta-docs">0 份 JD</span>
+      <span class="dot"></span>
+      <span id="meta-skills">0 项技能</span>
+      <button class="ghost" id="btn-clear" type="button">清空数据</button>
+    </div>
+  </div>
+</header>
+
+<main class="shell">
+
+  <!-- ------------------------------------------------ 左栏：输入 -->
+  <aside class="col-left">
+
+    <section class="block">
+      <div class="block-head">
+        <h2>粘贴一份招聘 JD</h2>
+        <span class="hint">Ctrl + Enter 分析</span>
+      </div>
+      <div class="drop" id="drop">
+        <textarea id="jd-text" spellcheck="false" placeholder="把 Boss / 实习僧 / 牛客上的 JD 原文粘到这里…&#10;&#10;也可以直接把 .txt 文件拖进来。"></textarea>
+        <div class="drop-mask" id="drop-mask">松开即可导入</div>
+      </div>
+      <div class="row">
+        <button class="primary" id="btn-analyze" type="button">分析这份 JD</button>
+        <button class="ghost" id="btn-sample" type="button">载入示例</button>
+      </div>
+      <p class="privacy">所有解析都在你的浏览器里完成，不会上传任何内容。</p>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <h2>我的技能</h2>
+        <span class="hint">点一下即可切换</span>
+      </div>
+      <div class="tags" id="skill-tags"></div>
+      <div class="add-skill">
+        <input id="new-skill" type="text" maxlength="20" placeholder="补充一个技能，回车添加" />
+      </div>
+    </section>
+
+    <section class="block grow">
+      <div class="block-head">
+        <h2>已分析</h2>
+        <span class="hint" id="doc-count">0 份</span>
+      </div>
+      <ul class="doc-list" id="doc-list"></ul>
+    </section>
+
+  </aside>
+
+  <!-- ------------------------------------------------ 右栏：结果 -->
+  <section class="col-right">
+
+    <div class="empty" id="empty-state">
+      <div class="empty-art">
+        <span></span><span></span><span></span>
+      </div>
+      <h3>还没有分析任何 JD</h3>
+      <p>左边粘一段招聘要求，这里会告诉你：它在要什么、你缺什么、优先级怎么排。</p>
+    </div>
+
+    <div id="result" hidden>
+
+      <article class="panel">
+        <header class="panel-head">
+          <div>
+            <h2 id="doc-title">—</h2>
+            <div class="chips" id="doc-meta"></div>
+          </div>
+          <button class="icon-btn" id="btn-export" type="button" title="导出为 Markdown">导出 ↓</button>
+        </header>
+
+        <div class="score-row">
+          <div class="ring-wrap">
+            <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+              <circle class="ring-fg" id="ring-fg" cx="60" cy="60" r="50"></circle>
+            </svg>
+            <div class="ring-text">
+              <b id="score-num">0%</b>
+              <span>匹配度</span>
+            </div>
+          </div>
+          <div class="score-copy">
+            <p id="score-line">—</p>
+            <ul class="mini-kpis">
+              <li><b id="kpi-hit">0</b><span>JD 要求技能</span></li>
+              <li><b id="kpi-have">0</b><span>你已具备</span></li>
+              <li><b id="kpi-gap">0</b><span>待补齐</span></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <header class="panel-head">
+          <h2>它在要什么</h2>
+          <span class="sub">按权重排序，条越长越重要</span>
+        </header>
+        <div class="bars" id="bars-hits"></div>
+      </article>
+
+      <article class="panel">
+        <header class="panel-head">
+          <h2>你还缺什么</h2>
+          <span class="sub">按优先级排，先补前三个就够</span>
+        </header>
+        <ul class="gaps" id="gap-list"></ul>
+      </article>
+
+    </div>
+
+    <article class="panel summary" id="summary" hidden>
+      <header class="panel-head">
+        <h2>全部 JD 汇总</h2>
+        <span class="sub" id="summary-sub">出现次数越多，越是这个方向的硬通货</span>
+      </header>
+      <div class="bars compact" id="bars-summary"></div>
+    </article>
+
+  </section>
+</main>
+
+<footer class="foot">
+  <span>纯前端实现 · 无框架 · 无网络请求 · 数据只存在你的浏览器里</span>
+  <span id="foot-note"></span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/dict.js"></script>
+<script src="js/parser.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
